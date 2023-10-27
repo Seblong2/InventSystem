@@ -8,12 +8,12 @@ public class InventItem : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
 {
     [Header("UI")]
     public Image image;
-    Transform parentAfterDrag;
+    [HideInInspector] public Transform parentAfterDrag;
    public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("Begin");
 
-        //image.raycastTarget = false;
+        image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
@@ -30,5 +30,6 @@ public class InventItem : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDra
         Debug.Log("End");
 
         transform.SetParent(parentAfterDrag);
+        image.raycastTarget = true;
     }
 }
